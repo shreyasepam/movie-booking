@@ -1,14 +1,26 @@
 import { FC } from "react";
 import IMovieBannerProps from "./IMovieBanner.props";
-import { useAppSelector } from "../../redux/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../redux/reduxHooks";
 import AppImage from "../appImage";
 import BgImage from "../appImage/BgImage";
 import MovieGenre from "../movieGenre";
 import MovieRating from "../movieRating";
 import AppButton from "../appButton";
+import { setLoginModal } from "../../redux/slice/loginSlice";
 
 const MovieBanner: FC<IMovieBannerProps> = () => {
+  const dispatch = useAppDispatch();
   const movieDetails = useAppSelector((state) => state.movie.data);
+  const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn);
+
+  const onHandleClick = () => {
+    if (isLoggedIn) {
+      //bookings
+      return;
+    }
+    dispatch(setLoginModal({ isOpen: false }));
+  };
+
   return (
     <BgImage
       path={movieDetails?.backdrop_path || ""}
@@ -45,6 +57,7 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
               text: "text-base font-medium text-white",
             }}
             title="Book tickets"
+            onClick={onHandleClick}
           />
         </div>
       </div>

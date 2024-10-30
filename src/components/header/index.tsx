@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import IHeaderProps from "./IHeader.props";
 import { ReactSVG } from "react-svg";
 import Search from "../../assets/search.svg";
@@ -7,11 +7,24 @@ import Logout from "../../assets/logout.svg";
 import { useLocation } from "react-router-dom";
 import AppButton from "../appButton";
 import Tooltip from "../tooltip";
+import { useAppDispatch, useAppSelector } from "../../redux/reduxHooks";
+import { logout, setLoginModal } from "../../redux/slice/loginSlice";
 
 const Header: React.FC<IHeaderProps> = () => {
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn);
 
-  console.log("myparams", location);
+  const onHandleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const { value } = event.currentTarget;
+    if (value === "logout") {
+      dispatch(logout());
+    } else {
+      dispatch(setLoginModal({ isOpen: true }));
+    }
+  };
+
+  console.log("myValias", isLoggedIn);
 
   return (
     <header className=" h-16 flex items-center justify-center px-4 sticky top-0 z-10">
@@ -55,7 +68,7 @@ const Header: React.FC<IHeaderProps> = () => {
                       <ReactSVG
                         src={Search}
                         className="text-white w-4 h-4 cursor-pointer"
-                        title="Logout"
+                        title="Search"
                       />
                     }
                   />
@@ -77,23 +90,29 @@ const Header: React.FC<IHeaderProps> = () => {
                   className="text-white w-4 h-4 cursor-pointer"
                 />
               }
+              value={"profile"}
+              onClick={onHandleClick}
             />
           </Tooltip>
-          <Tooltip content="Logout" position="bottom">
-            <AppButton
-              classes={{
-                root: "rounded-full w-9 h-9 text-white px-1 py-1 flex items-center justify-center bg-blue-base border-2 ml-2",
-                text: "text-sm font-medium",
-              }}
-              icon={
-                <ReactSVG
-                  src={Logout}
-                  className="text-white w-4 h-4 cursor-pointer"
-                  title="Logout"
-                />
-              }
-            />
-          </Tooltip>
+          {isLoggedIn && (
+            <Tooltip content="Logout" position="bottom">
+              <AppButton
+                classes={{
+                  root: "rounded-full w-9 h-9 text-white px-1 py-1 flex items-center justify-center bg-blue-base border-2 ml-2",
+                  text: "text-sm font-medium",
+                }}
+                icon={
+                  <ReactSVG
+                    src={Logout}
+                    className="text-white w-4 h-4 cursor-pointer"
+                    title="Logout"
+                  />
+                }
+                value={"logout"}
+                onClick={onHandleClick}
+              />
+            </Tooltip>
+          )}
         </div>
       </div>
     </header>

@@ -1,7 +1,8 @@
 import { FC } from "react";
 import IAppButtonProps from "./IAppButton.props";
 
-const AppButton: FC<IAppButtonProps> = ({ title, icon, classes }) => {
+const AppButton: FC<IAppButtonProps> = ({ title, icon, classes, ...rest }) => {
+
   return (
     <button
       className={`
@@ -13,6 +14,7 @@ const AppButton: FC<IAppButtonProps> = ({ title, icon, classes }) => {
          active:opacity-100
           ${classes?.root && classes?.root}
         `}
+     {...rest}
     >
       {icon && icon}
       {title && (
