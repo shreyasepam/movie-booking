@@ -3,7 +3,7 @@ import IMoviesScreenProps from './IMovies.props';
 
 const Movies:React.FC<IMoviesScreenProps> = () => {
   return (
-    <div>Movies</div>
+    <div className='w-full'>Movies</div>
   )
 }
 

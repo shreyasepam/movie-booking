@@ -5,9 +5,17 @@
 /* Alternative with backdrop-filter for glassmorphism effect */
 .bg-glass {
   background: linear-gradient(180deg, 
-  rgba(203, 213, 225, 0.9) 0%,
+  rgba(203, 213, 225, 0.9) 10%,
   rgba(186, 210, 243, 0.95) 100%
   );
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+.bg-blue-dark{
+  background: #010F1D;
+}
+
+.bg-blue-base{
+  background: #1B2733;
 }
