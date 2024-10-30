@@ -15,5 +15,5 @@ export default interface IMovieCardProps {
   title?: string | null;
   rating?: number | null;
   language?: string;
-  onCardClick?: (id?: number) => void;
+  onCardClick?: (id: number) => void;
 }
