@@ -4,6 +4,7 @@ import MovieBanner from "../../components/movieBanner";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../redux/reduxHooks";
 import { getMovieById } from "../../redux/slice/movieByIdSlice";
+import MovieOverview from "../../components/movieOverview";
 
 const MovieDetails: React.FC<IMovieDetailsScreenProps> = () => {
   const dispatch = useAppDispatch();
@@ -16,8 +17,9 @@ const MovieDetails: React.FC<IMovieDetailsScreenProps> = () => {
   }, [id]);
 
   return (
-    <div>
+    <div >
       <MovieBanner />
+      <MovieOverview /> 
     </div>
   );
 };

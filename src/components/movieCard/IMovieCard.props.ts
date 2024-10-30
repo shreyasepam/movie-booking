@@ -1,15 +1,13 @@
-export default interface IMovieCardProps {
-  classes?: {
+import { MovieRatingClasses } from "../movieRating/IMovieRating.props";
+
+ export type MovieCardClasses = {
     root?: string;
     image?: string;
     title?: string;
-    footer?: string;
-    svgWrapper?: string;
-    svg?: string;
-    rating?: string;
-    divider?: string;
-    language?: string;
-  };
+}
+
+export default interface IMovieCardProps {
+  classes?: MovieRatingClasses & MovieCardClasses;
   id?: number;
   poster?: string | null;
   title?: string | null;

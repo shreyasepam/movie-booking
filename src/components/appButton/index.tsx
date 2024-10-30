@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IAppButtonProps from "./IAppButton.props";
 
-const AppButton: FC<IAppButtonProps> = ({ title, icon, className }) => {
+const AppButton: FC<IAppButtonProps> = ({ title, icon, classes }) => {
   return (
     <button
       className={`
@@ -9,14 +9,15 @@ const AppButton: FC<IAppButtonProps> = ({ title, icon, className }) => {
           px-4 py-2 
           rounded-full 
           transition-colors
-         bg-gray-400/60
          hover:opacity-70
          active:opacity-100
-          ${className ? className : ""}
+          ${classes?.root && classes?.root}
         `}
     >
       {icon && icon}
-      {title && <span className="text-sm font-medium">{title}</span>}
+      {title && (
+        <span className={`${classes?.text && classes?.text}`}>{title}</span>
+      )}
     </button>
   );
 };

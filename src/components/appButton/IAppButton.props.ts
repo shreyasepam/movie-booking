@@ -4,4 +4,8 @@ export default interface IAppButtonProps{
     icon?:React.ReactNode
     className?:string
     animateTitle?:boolean
+    classes?:{
+        root?:string;
+        text?:string;
+    }
 }

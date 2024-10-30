@@ -16,7 +16,7 @@ const Header: React.FC<IHeaderProps> = () => {
   return (
     <header className=" h-16 flex items-center justify-center px-4 sticky top-0 z-10">
       <div className="max-w-7xl flex items-center justify-between w-full">
-        <h1 className="font-bold text-[#1B2733] text-2xl">BoöK_M</h1>
+        <h1 className="font-bold text-[#1B2733] text-2xl">BoöK_EM</h1>
         <div className="flex-1 flex items-center justify-center">
           <nav className="bg-blue-dark rounded-full">
             <ul className="flex items-center p-1">
@@ -47,7 +47,10 @@ const Header: React.FC<IHeaderProps> = () => {
               <li className="">
                 <Tooltip content="Search" position="bottom">
                   <AppButton
-                    className="rounded-full w-8 h-8 px-1 py-1 ml-4 flex items-center justify-center bg-blue-base"
+                    classes={{
+                      root: "rounded-full w-8 h-8 px-1 py-1 ml-4 flex items-center justify-center bg-blue-base",
+                      text: "text-sm font-medium",
+                    }}
                     icon={
                       <ReactSVG
                         src={Search}
@@ -64,7 +67,10 @@ const Header: React.FC<IHeaderProps> = () => {
         <div className="flex">
           <Tooltip content="Profile" position="bottom">
             <AppButton
-              className="rounded-full w-9 h-9 text-white px-1 py-1 flex items-center justify-center bg-blue-base border-2 "
+              classes={{
+                root: "rounded-full w-9 h-9 text-white px-1 py-1 flex items-center justify-center bg-blue-base border-2",
+                text: "text-sm font-medium",
+              }}
               icon={
                 <ReactSVG
                   src={Profile}
@@ -75,7 +81,10 @@ const Header: React.FC<IHeaderProps> = () => {
           </Tooltip>
           <Tooltip content="Logout" position="bottom">
             <AppButton
-              className="rounded-full w-9 h-9 text-white px-1 py-1 flex items-center justify-center bg-blue-base border-2 ml-2"
+              classes={{
+                root: "rounded-full w-9 h-9 text-white px-1 py-1 flex items-center justify-center bg-blue-base border-2 ml-2",
+                text: "text-sm font-medium",
+              }}
               icon={
                 <ReactSVG
                   src={Logout}

@@ -3,10 +3,12 @@ import IMovieBannerProps from "./IMovieBanner.props";
 import { useAppSelector } from "../../redux/reduxHooks";
 import AppImage from "../appImage";
 import BgImage from "../appImage/BgImage";
+import MovieGenre from "../movieGenre";
+import MovieRating from "../movieRating";
+import AppButton from "../appButton";
 
 const MovieBanner: FC<IMovieBannerProps> = () => {
   const movieDetails = useAppSelector((state) => state.movie.data);
-  const movieMeta = useAppSelector((state) => state.movieMeta.data);
   return (
     <BgImage
       path={movieDetails?.backdrop_path || ""}
@@ -23,9 +25,27 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
           </p>
         </div>
         <div className="h-full ml-8">
-          <h2 className="text-3xl text-white font-bold">
+          <h2 className="text-4xl text-white font-bold">
             {movieDetails?.title}
           </h2>
+          <MovieGenre data={movieDetails?.genre_ids} />
+          <MovieRating
+            classes={{
+              footer: "mt-3",
+              rating: "text-base text-white font-light",
+              language: "text-base text-white font-light",
+              divider: "mx-2",
+            }}
+            rating={movieDetails?.vote_average}
+            language={movieDetails?.original_language}
+          />
+          <AppButton
+            classes={{
+              root: "rounded-md px-16 py-3 mt-6 flex items-center justify-center bg-blue-base",
+              text: "text-base font-medium text-white",
+            }}
+            title="Book tickets"
+          />
         </div>
       </div>
     </BgImage>
