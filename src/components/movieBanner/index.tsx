@@ -1,24 +1,34 @@
 import { FC } from "react";
 import IMovieBannerProps from "./IMovieBanner.props";
+import { useAppSelector } from "../../redux/reduxHooks";
+import AppImage from "../appImage";
+import BgImage from "../appImage/BgImage";
 
 const MovieBanner: FC<IMovieBannerProps> = () => {
+  const movieDetails = useAppSelector((state) => state.movie.data);
+  const movieMeta = useAppSelector((state) => state.movieMeta.data);
   return (
-    <div className="w-full min-h-80 bg-slate-800 flex items-center p-8">
-      <div>
-        <img
-          className="w-56 rounded"
-          src={
-            "https://m.media-amazon.com/images/M/MV5BNWE5MGI3MDctMmU5Ni00YzI2LWEzMTQtZGIyZDA5MzQzNDBhXkEyXkFqcGc@._V1_SX300.jpg"
-          }
-        />
-        <p className="w-full text-center text-white bg-black py-1 text-sm">Released on </p>
+    <BgImage
+      path={movieDetails?.backdrop_path || ""}
+      className="w-full min-h-80 bg-slate-800 p-8 bg-no-repeat bg-cover bg-center"
+    >
+      <div className="z-[1] flex items-center relative">
+        <div>
+          <AppImage
+            className="w-56 rounded"
+            path={movieDetails?.poster_path || ""}
+          />
+          <p className="w-full text-center text-white bg-black py-1 text-sm border-t-2">
+            Released on {movieDetails?.release_date}
+          </p>
+        </div>
+        <div className="h-full ml-8">
+          <h2 className="text-3xl text-white font-bold">
+            {movieDetails?.title}
+          </h2>
+        </div>
       </div>
-      <div className="h-full ml-8">
-        <h2 className="text-3xl text-white font-bold">
-          Garasdasd asd asd asd asd
-        </h2>
-      </div>
-    </div>
+    </BgImage>
   );
 };
 

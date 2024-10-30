@@ -19,11 +19,11 @@ const initialState: MoviesState = {
 
 export const getMovieById = createAsyncThunk<
   IMovie | undefined,
-  { id: number }
+  { id: string }
 >("movieById/getMovieById", async ({ id }, { rejectWithValue }) => {
   try {
     const datas = DummyData as IMovieAPIResponse;
-    return datas?.results?.find((x) => x.id === id);
+    return datas?.results?.find((x) => x.id === parseInt(id));
 
     // const response = await myAxios.get<IMovie[]>(`/posts`);
     // if (response && response.data && response.data.length > 0) {
