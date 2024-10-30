@@ -8,7 +8,7 @@ import AppContainer from "../components/appContainer";
 
 export default function AppRouter() {
   return (
-    <div className="relative">
+    <div className="relative w-screen h-screen overflow-auto">
       <Router basename="/">
         <Header />
         <AppContainer>
