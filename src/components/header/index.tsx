@@ -16,7 +16,7 @@ const Header: React.FC<IHeaderProps> = () => {
   return (
     <header className=" h-16 flex items-center justify-center px-4 sticky top-0 z-10">
       <div className="max-w-7xl flex items-center justify-between w-full">
-          <h1 className="font-bold text-[#1B2733] text-2xl">BoöK_M</h1>
+        <h1 className="font-bold text-[#1B2733] text-2xl">BoöK_M</h1>
         <div className="flex-1 flex items-center justify-center">
           <nav className="bg-blue-dark rounded-full">
             <ul className="flex items-center p-1">
@@ -45,17 +45,17 @@ const Header: React.FC<IHeaderProps> = () => {
                 </a>
               </li>
               <li className="">
-              <Tooltip content="Search" position="bottom">
-                <AppButton
-                  className="rounded-full w-8 h-8 px-1 py-1 ml-4 flex items-center justify-center bg-blue-base"
-                  icon={
-                    <ReactSVG
-                      src={Search}
-                      className="text-white w-4 h-4 cursor-pointer"
-                      title="Logout"
-                    />
-                  }
-                />
+                <Tooltip content="Search" position="bottom">
+                  <AppButton
+                    className="rounded-full w-8 h-8 px-1 py-1 ml-4 flex items-center justify-center bg-blue-base"
+                    icon={
+                      <ReactSVG
+                        src={Search}
+                        className="text-white w-4 h-4 cursor-pointer"
+                        title="Logout"
+                      />
+                    }
+                  />
                 </Tooltip>
               </li>
             </ul>

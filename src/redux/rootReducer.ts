@@ -4,6 +4,9 @@ import storage from "redux-persist/lib/storage";
 // import session from "redux-persist/lib/storage/session";
 
 import LoginReducer from "./slice/loginSlice";
+import MoviesReducer from "./slice/moviesSlice";
+import MovieByIdReducer from "./slice/movieByIdSlice";
+import MovieMetaReducer from "./slice/movieMetaSlice";
 
 const VERSION = "v1";
 
@@ -18,5 +21,8 @@ const localStorage = (key: string): PersistConfig<any> => ({
 // });
 
 export const rootReducer = combineReducers({
-  login: persistReducer(localStorage("login"), LoginReducer)
+  login: persistReducer(localStorage("login"), LoginReducer),
+  movies: MoviesReducer,
+  movie: MovieByIdReducer,
+  movieMeta: MovieMetaReducer,
 });

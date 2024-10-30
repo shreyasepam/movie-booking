@@ -1,13 +1,35 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import IMovieCardProps from "./IMovieCard.props";
 import { ReactSVG } from "react-svg";
 import Star from "../../assets/star.svg";
+import AppImage from "../appImage";
+import { useAppSelector } from "../../redux/reduxHooks";
 
-const MovieCard: FC<IMovieCardProps> = ({ classes }) => {
+const MovieCard: FC<IMovieCardProps> = ({
+  classes,
+  poster,
+  rating,
+  title,
+  language,
+  id,
+  onCardClick,
+}) => {
+  const movieMetaLanguage = useAppSelector(
+    (state) => state.movieMeta.data?.languages
+  );
+  const onClickHandle = useCallback(() => {
+    if (onCardClick && id) {
+      onCardClick(id);
+    }
+  }, [id, onCardClick]);
+
   return (
-    <div className={`cursor-pointer ${classes?.root || ""}`}>
-      <img
-        src={"https://picsum.photos/200/300"}
+    <div
+      className={`cursor-pointer ${classes?.root || ""}`}
+      onClick={onClickHandle}
+    >
+      <AppImage
+        path={poster || ""}
         className={`object-cover h-64 rounded-2xl hover:shadow-2xl ${
           classes?.image || ""
         }`}
@@ -17,7 +39,7 @@ const MovieCard: FC<IMovieCardProps> = ({ classes }) => {
           classes?.title || ""
         }`}
       >
-        Lorem ipsum
+        {title}
       </p>
       <div className={`flex items-center mt-1 ${classes?.footer || ""}`}>
         <div className={`flex items-center ${classes?.svgWrapper || ""}`}>
@@ -26,12 +48,14 @@ const MovieCard: FC<IMovieCardProps> = ({ classes }) => {
             className={`text-amber-600 w-4 h-4 ${classes?.svg || ""}`}
           />
           <p className={`ml-1 text-xs text-gray-300 ${classes?.rating || ""}`}>
-            7.8
+            {rating}
           </p>
         </div>
-        <hr className={` w-[1px] h-3 bg-gray-400 mx-1 ${classes?.divider || ""}`} />
-        <p className={` text-xs text-gray-300 ${classes?.year || ""}`}>
-          2023
+        <hr
+          className={` w-[1px] h-3 bg-gray-400 mx-1 ${classes?.divider || ""}`}
+        />
+        <p className={` text-xs text-gray-300 ${classes?.language || ""}`}>
+          {movieMetaLanguage?.[language || ""] || "NA"}
         </p>
       </div>
     </div>

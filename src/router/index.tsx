@@ -5,8 +5,17 @@ import Bookings from "../screens/bookings";
 import NotFound from "../screens/notFound";
 import Header from "../components/header";
 import AppContainer from "../components/appContainer";
+import { useEffect } from "react";
+import { useAppDispatch } from "../redux/reduxHooks";
+import { getMovieMeta } from "../redux/slice/movieMetaSlice";
 
 export default function AppRouter() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getMovieMeta());
+  }, []);
+
   return (
     <div className="relative w-screen h-screen overflow-auto">
       <Router basename="/">

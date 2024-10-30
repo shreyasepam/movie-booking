@@ -13,10 +13,3 @@ export interface IDefaultState {
   
   export type THTTPCodes = Record<number, IHTTPCodes>;
   export interface IHTTPCodes { code: number; message: string }
-  
-  export interface IPosts {
-    userId?: number;
-    id?: number;
-    title?: string;
-    body?: string;
-  }
