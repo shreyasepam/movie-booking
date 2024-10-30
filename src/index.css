@@ -4,10 +4,7 @@
 
 /* Alternative with backdrop-filter for glassmorphism effect */
 .bg-glass {
-  background: linear-gradient(180deg, 
-  rgba(203, 213, 225, 0.9) 10%,
-  rgba(186, 210, 243, 0.95) 100%
-  );
+  background: linear-gradient(180deg, rgb(119 141 167 / 90%) 10%, rgb(44 55 70 / 95%) 100%);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }

@@ -14,7 +14,7 @@ const Header: React.FC<IHeaderProps> = () => {
   console.log("myparams", location);
 
   return (
-    <header className=" h-20 flex items-center justify-center px-4 sticky top-0 z-10">
+    <header className=" h-16 flex items-center justify-center px-4 sticky top-0 z-10">
       <div className="max-w-7xl flex items-center justify-between w-full">
           <h1 className="font-bold text-[#1B2733] text-2xl">BoöK_M</h1>
         <div className="flex-1 flex items-center justify-center">
