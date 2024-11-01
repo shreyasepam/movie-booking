@@ -7,6 +7,7 @@ import LoginReducer from "./slice/loginSlice";
 import MoviesReducer from "./slice/moviesSlice";
 import MovieByIdReducer from "./slice/movieByIdSlice";
 import MovieMetaReducer from "./slice/movieMetaSlice";
+import BookingSlotReducer from "./slice/bookingSlotSlice";
 
 const VERSION = "v1";
 
@@ -25,4 +26,5 @@ export const rootReducer = combineReducers({
   movies: MoviesReducer,
   movie: MovieByIdReducer,
   movieMeta: MovieMetaReducer,
+  bookingSlot: BookingSlotReducer,
 });

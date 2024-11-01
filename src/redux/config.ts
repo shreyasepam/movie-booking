@@ -1,3 +1,5 @@
+import { IBookingTime } from "./interface/BookingSlot";
+
 export function movieObjectMapper<T extends Record<string, any>>(
   data: T[],
   key: keyof T,
@@ -13,3 +15,26 @@ export function movieObjectMapper<T extends Record<string, any>>(
 
   return obj;
 }
+
+export const movieTimeSlot: IBookingTime[] = [
+  {
+    id: "9AM",
+    time: "9:00 AM",
+    cost: 300,
+  },
+  {
+    id: "1PM",
+    time: "1:00 PM",
+    cost: 300,
+  },
+  {
+    id: "5PM",
+    time: "5:00 PM",
+    cost: 400,
+  },
+  {
+    id: "11PM",
+    time: "11:00 PM",
+    cost: 350,
+  },
+];
