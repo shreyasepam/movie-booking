@@ -56,7 +56,7 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
               root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-red-600 sm:ml-3 sm:w-auto",
               text: "text-sm font-medium text-white",
             }}
-            title="Cancel"
+            title={bookingModal?.isReadOnly ? "Close" : "Cancel"}
             onClick={onClose}
           />
         </div>

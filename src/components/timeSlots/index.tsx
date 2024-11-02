@@ -53,7 +53,7 @@ const TimeSlots: FC<ITimeSlotsProps> = () => {
           time={slot.time}
           isSelected={bookingSlot?.id === slot.id}
           onClick={onHandleClick}
-          disabled={validTime(slot.time)}
+          disabled={isReadOnly ? bookingSlot?.id !== slot.id : validTime(slot.time)}
         />
       ))}
     </div>

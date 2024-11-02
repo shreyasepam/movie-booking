@@ -37,7 +37,7 @@ export const movieTimeSlot: IBookingTime[] = [
     id: "11PM",
     time: "11:00 PM",
     cost: 350,
-  },
+  }
 ];
 
 export const validTime = (givenTime: string): boolean => {
