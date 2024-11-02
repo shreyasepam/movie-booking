@@ -5,17 +5,26 @@ import MovieTheaterMap from "../../movieTheaterMap";
 import TimeSlots from "../../timeSlots";
 import AppButton from "../../appButton";
 import { cleatBookingSlot } from "../../../redux/slice/bookingSlotSlice";
+import { setMovieBooking } from "../../../redux/slice/bookingsSlice";
 
 const BookingModal: React.FC<IBookingModalProps> = () => {
   const dispatch = useAppDispatch();
-  const bookingModalIsOpen = useAppSelector(
-    (state) => state.bookingSlot.isOpen
-  );
-  const bookingModalReadOnly = useAppSelector(
-    (state) => state.bookingSlot.isReadOnly
-  );
+  const bookingModal = useAppSelector((state) => state.bookingSlot);
 
-  const onHandleBook = () => {};
+  const onHandleBook = () => {
+    if (bookingModal.slot && bookingModal.seats.length > 0) {
+      dispatch(
+        setMovieBooking({
+          date: bookingModal.date,
+          seats: bookingModal.seats,
+          slot: bookingModal.slot,
+          movie: bookingModal.movie,
+          user: bookingModal.user,
+        })
+      );
+      onClose();
+    }
+  };
 
   const onClose = () => {
     dispatch(cleatBookingSlot());
@@ -23,16 +32,16 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
 
   return (
     <ModalWrapper
-      isOpen={bookingModalIsOpen}
+      isOpen={bookingModal.isOpen}
       maxWidth="max-w-2xl"
-      title={bookingModalReadOnly ? "Your booking" : "Book tickets"}
+      title={bookingModal.isReadOnly ? "Your booking" : "Book tickets"}
       onClose={onClose}
     >
       <div>
         <TimeSlots />
         <MovieTheaterMap />
         <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-          {!bookingModalReadOnly && (
+          {!bookingModal.isReadOnly && (
             <AppButton
               classes={{
                 root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-blue-base sm:ml-3 sm:w-auto sm:mt-0 sm:w-auto",

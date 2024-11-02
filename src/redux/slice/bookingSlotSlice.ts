@@ -13,6 +13,7 @@ export interface BookingSlot {
   user?: string;
   date: string;
   isReadOnly?: boolean;
+  occupied?:number[]
 }
 
 let now = dayjs();

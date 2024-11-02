@@ -4,7 +4,7 @@ import { ReactSVG } from "react-svg";
 import Search from "../../assets/search.svg";
 import Profile from "../../assets/profile.svg";
 import Logout from "../../assets/logout.svg";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AppButton from "../appButton";
 import Tooltip from "../tooltip";
 import { useAppDispatch, useAppSelector } from "../../redux/reduxHooks";
@@ -34,8 +34,8 @@ const Header: React.FC<IHeaderProps> = () => {
           <nav className="bg-blue-dark rounded-full">
             <ul className="flex items-center p-1">
               <li className="px-6 py-1">
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className={`${
                     pathname === "/" ||
                     pathname === "/dashboard" ||
@@ -45,17 +45,17 @@ const Header: React.FC<IHeaderProps> = () => {
                   } text-sm`}
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li className="px-6 py-1">
-                <a
-                  href="/bookings"
+                <Link
+                  to="/bookings"
                   className={`${
                     pathname === "/bookings" ? "text-white" : "text-gray-400"
                   } text-sm`}
                 >
                   Bookings
-                </a>
+                </Link>
               </li>
               <li className="">
                 <Tooltip content="Search" position="bottom">

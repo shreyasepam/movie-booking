@@ -13,7 +13,7 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
   const dispatch = useAppDispatch();
   const movieDetails = useAppSelector((state) => state.movie.data);
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn);
-  const loginPhone = useAppSelector((state) => state.login.phone);
+  const loginEmail = useAppSelector((state) => state.login.email);
 
   const onHandleClick = () => {
     if (isLoggedIn) {
@@ -21,7 +21,7 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
         setBookingSlotModal({
           isOpen: true,
           movie: movieDetails,
-          user: loginPhone,
+          user: loginEmail,
         })
       );
       return;

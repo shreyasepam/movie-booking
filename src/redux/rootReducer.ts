@@ -8,6 +8,7 @@ import MoviesReducer from "./slice/moviesSlice";
 import MovieByIdReducer from "./slice/movieByIdSlice";
 import MovieMetaReducer from "./slice/movieMetaSlice";
 import BookingSlotReducer from "./slice/bookingSlotSlice";
+import BookingsReducer from "./slice/bookingsSlice";
 
 const VERSION = "v1";
 
@@ -27,4 +28,5 @@ export const rootReducer = combineReducers({
   movie: MovieByIdReducer,
   movieMeta: MovieMetaReducer,
   bookingSlot: BookingSlotReducer,
+  bookings: BookingsReducer,
 });

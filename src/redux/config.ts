@@ -47,11 +47,10 @@ export const validTime = (givenTime: string): boolean => {
     `${formattedTodayDate} ${givenTime}`,
     "YYYY-MM-DD h:mm A"
   );
-  console.log("qweqwe", givenDateTime, now.isAfter(givenDateTime));
   return now.isAfter(givenDateTime);
 };
 
-export const nearestTimeSlot = (): IBookingTime | undefined => {
+export const nearestTimeSlot = (): IBookingTime|undefined => {
   const now = dayjs();
   const today = now.format("YYYY-MM-DD");
   const futureSlots = movieTimeSlot?.slice().filter((slot) => {
