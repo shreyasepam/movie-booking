@@ -8,7 +8,7 @@ const MovieTheaterMap: FC<IMovieTheaterMapProps> = () => {
   const bookingSlot = useAppSelector((state) => state.bookingSlot);
 
   return (
-    <div className="text-center flex flex-col items-center min-h-screen bg-neutral-800 text-white text-sm py-8">
+    <div className="text-center flex flex-col items-center min-h-screen bg-blue-dark text-white text-sm py-8">
       <ShowCase />
       <Cinema occupied={[]} />
       <p className="text-white">

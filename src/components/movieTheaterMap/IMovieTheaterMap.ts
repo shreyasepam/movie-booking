@@ -15,4 +15,4 @@ export interface IMovieSeat {
     occupied: number[];
   }
 
-  export const seats: number[] = Array.from({ length: 2 * 8 }, (_, i) => i);
+  export const seats: number[] = Array.from({ length: 4 * 8 }, (_, i) => i);

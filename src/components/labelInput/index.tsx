@@ -8,7 +8,7 @@ interface ILabelInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const LabelInput: FC<ILabelInputProps> = ({ label, error, ...rest }) => {
   return (
     <div>
-      <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+      <label htmlFor="name" className="block text-gray-100 font-semibold mb-2">
         {label}
       </label>
       <input

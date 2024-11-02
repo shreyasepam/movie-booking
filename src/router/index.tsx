@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../redux/reduxHooks";
 import { getMovieMeta } from "../redux/slice/movieMetaSlice";
 import LoginModal from "../components/modal/loginModal";
+import BookingModal from "../components/modal/bookingModal";
 
 export default function AppRouter() {
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ export default function AppRouter() {
           </Routes>
         </AppContainer>
       </Router>
+      <BookingModal />
       <LoginModal />
     </div>
   );

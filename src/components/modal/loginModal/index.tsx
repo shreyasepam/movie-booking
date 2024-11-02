@@ -78,11 +78,11 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
   return (
     <ModalWrapper isOpen={loginModal.isOpen}>
       <div>
-        <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 w-full">
+        <div className="bg-blue-dark px-4 pb-4 pt-5 sm:p-6 sm:pb-4 w-full">
           <div className="sm:flex sm:items-start w-full">
             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
               <h3
-                className="text-lg font-semibold text-gray-900 text-center"
+                className="text-lg font-semibold text-gray-100 text-center"
                 id="modal-title"
               >
                 {` ${loginModal?.isLoggedIn ? "Profile" : " Get started"}`}
@@ -121,7 +121,16 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+        <div className="bg-blue-dark px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <AppButton
+            classes={{
+              root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-blue-base sm:ml-3 sm:w-auto sm:mt-0 sm:w-auto",
+              text: "text-sm font-medium text-gray-100 ",
+            }}
+            title={`${loginModal?.isLoggedIn ? "Update" : "Sign in"}`}
+            type="submit"
+            onClick={handleSubmit}
+          />
           <AppButton
             classes={{
               root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-red-600 sm:ml-3 sm:w-auto",
@@ -129,15 +138,6 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
             }}
             title="Cancel"
             onClick={onClose}
-          />
-          <AppButton
-            classes={{
-              root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-white sm:ml-3 sm:w-auto shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto",
-              text: "text-sm font-medium text-gray-900 ",
-            }}
-            title={`${loginModal?.isLoggedIn ? "Update" : "Sign in"}`}
-            type="submit"
-            onClick={handleSubmit}
           />
         </div>
       </div>

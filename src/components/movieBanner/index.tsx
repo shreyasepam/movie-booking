@@ -7,15 +7,23 @@ import MovieGenre from "../movieGenre";
 import MovieRating from "../movieRating";
 import AppButton from "../appButton";
 import { setLoginModal } from "../../redux/slice/loginSlice";
+import { setBookingSlotModal } from "../../redux/slice/bookingSlotSlice";
 
 const MovieBanner: FC<IMovieBannerProps> = () => {
   const dispatch = useAppDispatch();
   const movieDetails = useAppSelector((state) => state.movie.data);
   const isLoggedIn = useAppSelector((state) => state.login.isLoggedIn);
+  const loginPhone = useAppSelector((state) => state.login.phone);
 
   const onHandleClick = () => {
     if (isLoggedIn) {
-      //bookings
+      dispatch(
+        setBookingSlotModal({
+          isOpen: true,
+          movie: movieDetails,
+          user: loginPhone,
+        })
+      );
       return;
     }
     dispatch(setLoginModal({ isOpen: false }));
