@@ -26,7 +26,7 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
       );
       return;
     }
-    dispatch(setLoginModal({ isOpen: false }));
+    dispatch(setLoginModal({ isOpen: true }));
   };
 
   return (

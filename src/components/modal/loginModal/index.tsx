@@ -122,7 +122,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
         <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <AppButton
             classes={{
-              root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-blue-base sm:ml-3 sm:w-auto sm:mt-0 sm:w-auto",
+              root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-blue-base sm:ml-3 sm:w-auto mb-2 sm:mb-0 sm:w-auto",
               text: "text-sm font-medium text-gray-100 ",
             }}
             title={`${loginModal?.isLoggedIn ? "Update" : "Sign in"}`}
