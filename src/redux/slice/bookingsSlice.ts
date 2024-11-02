@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { IBookingsData } from "../interface/Bookings";
+import dayjs from "dayjs";
 
 export interface BookingsState {
   data?: IBookingsData[];
@@ -15,7 +16,10 @@ export const bookingsSlice = createSlice({
   initialState,
   reducers: {
     setMovieBooking: (state, action: PayloadAction<IBookingsData>) => {
-      state.data = [...(state.data || []), action.payload];
+      state.data = [
+        ...(state.data || []),
+        { ...action.payload, id: dayjs().format() },
+      ];
     },
     clearBookings: (state) => {
       state.data = [];
