@@ -10,6 +10,9 @@ export const Cinema: React.FC<ICinemaProps> = ({ occupied }) => {
   const bookingSlot = useAppSelector((state) => state.bookingSlot);
 
   const handleSelectedState = (seat: number) => {
+    if (!bookingSlot.slot) {
+      return;
+    }
     const isSelected = bookingSlot.seats.includes(seat);
     if (isSelected) {
       dispatch(
@@ -23,9 +26,15 @@ export const Cinema: React.FC<ICinemaProps> = ({ occupied }) => {
   };
 
   return (
-    <div className="mb-5 perspective-[400px]">
-      <div className="h-[70px] bg-white w-full transform rotate-x-[-30deg] scale-110 shadow-[0_3px_10px_2px_rgba(0,0,0,0.3)] mb-6" />
-
+    <div className={"mb-5 perspective-[400px] relative"}>
+      {!bookingSlot?.slot && (
+        <div className="absolute  w-full h-full z-[1] hover:cursor-not-allowed" />
+      )}
+      <div
+        className={
+          "h-[70px] bg-white w-full transform rotate-x-[-30deg] scale-110 shadow-[0_3px_10px_2px_rgba(116,111,111,0.3)] mb-6 "
+        }
+      />
       <div className="grid gap-1.5 grid-cols-[repeat(8,min-content)] items-center">
         {seats.map((seat) => {
           const isSelected = bookingSlot.seats.includes(seat);
@@ -41,8 +50,8 @@ export const Cinema: React.FC<ICinemaProps> = ({ occupied }) => {
                   isSelected
                     ? "bg-green-500"
                     : isOccupied
-                    ? "bg-neutral-300"
-                    : "bg-neutral-600"
+                    ? "bg-neutral-200"
+                    : "bg-blue-base"
                 }
                 ${
                   !isOccupied &&

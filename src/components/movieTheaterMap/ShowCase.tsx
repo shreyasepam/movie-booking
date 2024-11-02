@@ -4,8 +4,8 @@ const ShowCase: React.FC = () => {
   return (
     <ul className="m-0 mb-4 p-3 list-none flex justify-center bg-neutral-700 rounded text-neutral-400">
       <li className="mx-3">
-        <span className="inline-block bg-neutral-600 w-4 h-3 rounded-t relative top-[1px]" />
-        <small className="ml-2">N/A</small>
+        <span className="inline-block bg-blue-base w-4 h-3 rounded-t relative top-[1px]" />
+        <small className="ml-2">Empty</small>
       </li>
       <li className="mx-3">
         <span className="inline-block bg-green-500 w-4 h-3 rounded-t relative top-[1px]" />

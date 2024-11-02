@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { IBookingTime } from "./interface/BookingSlot";
 
 export function movieObjectMapper<T extends Record<string, any>>(
@@ -38,3 +39,34 @@ export const movieTimeSlot: IBookingTime[] = [
     cost: 350,
   },
 ];
+
+export const validTime = (givenTime: string): boolean => {
+  const now = dayjs();
+  const formattedTodayDate = now.format("YYYY-MM-DD");
+  const givenDateTime = dayjs(
+    `${formattedTodayDate} ${givenTime}`,
+    "YYYY-MM-DD h:mm A"
+  );
+  console.log("qweqwe", givenDateTime, now.isAfter(givenDateTime));
+  return now.isAfter(givenDateTime);
+};
+
+export const nearestTimeSlot = (): IBookingTime | undefined => {
+  const now = dayjs();
+  const today = now.format("YYYY-MM-DD");
+  const futureSlots = movieTimeSlot?.slice().filter((slot) => {
+    return dayjs(`${today} ${slot.time}`, "YYYY-MM-DD h:mm A").isAfter(now);
+  });
+
+  if (futureSlots.length === 0) {
+    return undefined;
+  }
+
+  futureSlots.sort((a, b) => {
+    const timeA = dayjs(`${today} ${a.time}`, "YYYY-MM-DD h:mm A");
+    const timeB = dayjs(`${today} ${b.time}`, "YYYY-MM-DD h:mm A");
+    return timeA.diff(now) - timeB.diff(now);
+  });
+
+  return futureSlots[0];
+};

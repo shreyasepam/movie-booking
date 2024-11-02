@@ -76,17 +76,15 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
   };
 
   return (
-    <ModalWrapper isOpen={loginModal.isOpen}>
+    <ModalWrapper
+      isOpen={loginModal.isOpen}
+      title={` ${loginModal?.isLoggedIn ? "Profile" : " Get started"}`}
+      onClose={onClose}
+    >
       <div>
-        <div className="bg-blue-dark px-4 pb-4 pt-5 sm:p-6 sm:pb-4 w-full">
+        <div className=" px-4 pb-4 pt-5 sm:p-6 sm:pb-4 w-full">
           <div className="sm:flex sm:items-start w-full">
             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
-              <h3
-                className="text-lg font-semibold text-gray-100 text-center"
-                id="modal-title"
-              >
-                {` ${loginModal?.isLoggedIn ? "Profile" : " Get started"}`}
-              </h3>
               <div className="mt-2">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <LabelInput
@@ -121,7 +119,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
             </div>
           </div>
         </div>
-        <div className="bg-blue-dark px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+        <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <AppButton
             classes={{
               root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-blue-base sm:ml-3 sm:w-auto sm:mt-0 sm:w-auto",

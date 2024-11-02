@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { IBookingTime } from "../interface/BookingSlot";
 import { IMovie } from "../interface/movie";
 import dayjs from "dayjs";
+import { nearestTimeSlot } from "../config";
 
 export interface BookingSlot {
   isOpen: boolean;
@@ -11,17 +12,19 @@ export interface BookingSlot {
   seats: number[];
   user?: string;
   date: string;
+  isReadOnly?: boolean;
 }
 
 let now = dayjs();
 
 const initialState: BookingSlot = {
   isOpen: false,
-  slot: undefined,
+  slot: nearestTimeSlot(),
   movie: undefined,
   user: undefined,
   seats: [],
   date: now.format(),
+  isReadOnly: false,
 };
 
 export const bookingSlotSlice = createSlice({
@@ -30,11 +33,17 @@ export const bookingSlotSlice = createSlice({
   reducers: {
     setBookingSlotModal: (
       state,
-      action: PayloadAction<{ isOpen: boolean; movie?: IMovie; user?: string }>
+      action: PayloadAction<{
+        isOpen: boolean;
+        movie?: IMovie;
+        user?: string;
+        isReadOnly?: boolean;
+      }>
     ) => {
       state.isOpen = action.payload.isOpen;
       state.movie = action.payload.movie;
       state.user = action.payload.user;
+      state.isReadOnly = action.payload.isReadOnly;
     },
     setSlot: (state, action: PayloadAction<IBookingTime>) => {
       state.slot = action.payload;
@@ -46,7 +55,7 @@ export const bookingSlotSlice = createSlice({
       state.isOpen = false;
       state.movie = undefined;
       state.seats = [];
-      state.slot = undefined;
+      state.slot = nearestTimeSlot();
       state.user = undefined;
     },
   },
