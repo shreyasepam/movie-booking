@@ -9,6 +9,8 @@ import AppButton from "../appButton";
 import Tooltip from "../tooltip";
 import { useAppDispatch, useAppSelector } from "../../redux/reduxHooks";
 import { logout, setLoginModal } from "../../redux/slice/loginSlice";
+import { cleatBookingSlot } from "../../redux/slice/bookingSlotSlice";
+import { clearBookings } from "../../redux/slice/bookingsSlice";
 
 const Header: React.FC<IHeaderProps> = () => {
   const { pathname } = useLocation();
@@ -19,6 +21,8 @@ const Header: React.FC<IHeaderProps> = () => {
     const { value } = event.currentTarget;
     if (value === "logout") {
       dispatch(logout());
+      dispatch(cleatBookingSlot())
+      dispatch(clearBookings())
     } else {
       dispatch(setLoginModal({ isOpen: true }));
     }

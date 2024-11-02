@@ -19,12 +19,16 @@ const BookingsGridItem: FC<{ name?: string; value?: string }> = ({
 };
 
 const BookingsGrid: FC<IBookingsGridProps> = ({ booking }) => {
+  console.log("ASdasdasd", booking);
   return (
     <div className="grid grid-cols-12 gap-0 w-full mt-3">
       <BookingsGridItem name={"Slot"} value={booking.slot?.time} />
       <BookingsGridItem
         name={"Seat no"}
-        value={(booking.seats || []).join(", ")}
+        value={(booking.seats || [])
+          .slice()
+          .sort((a, b) => a - b)
+          .join(", ")}
       />
       <BookingsGridItem
         name={"Date"}
