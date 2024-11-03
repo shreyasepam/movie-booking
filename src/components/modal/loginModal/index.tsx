@@ -5,6 +5,7 @@ import LabelInput from "../../labelInput";
 import { useAppDispatch, useAppSelector } from "../../../redux/reduxHooks";
 import { setLoginModal, setUserDetails } from "../../../redux/slice/loginSlice";
 import ModalWrapper from "../ModalWrapper";
+import { toast } from "react-toastify";
 
 const LoginModal: React.FC<ILoginModalProps> = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +46,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent, type: string) => {
     e.preventDefault();
     const newErrors: { [key: string]: string } = {};
 
@@ -73,6 +74,11 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
         ...form,
       })
     );
+    if (type === "update") {
+      toast("User updated.");
+    } else {
+      toast(`Welcome to 🎥BoöK_EM, ${form.name}`);
+    }
   };
 
   return (
@@ -86,7 +92,15 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
           <div className="sm:flex sm:items-start w-full">
             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
               <div className="mt-2">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form
+                  onSubmit={(e) =>
+                    handleSubmit(
+                      e,
+                      loginModal?.isLoggedIn ? "Update" : "Sign in"
+                    )
+                  }
+                  className="space-y-4"
+                >
                   <LabelInput
                     label="Name"
                     type="text"
@@ -127,7 +141,9 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
             }}
             title={`${loginModal?.isLoggedIn ? "Update" : "Sign in"}`}
             type="submit"
-            onClick={handleSubmit}
+            onClick={(e) =>
+              handleSubmit(e, loginModal?.isLoggedIn ? "Update" : "Sign in")
+            }
           />
           <AppButton
             classes={{

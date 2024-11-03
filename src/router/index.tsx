@@ -10,6 +10,7 @@ import { useAppDispatch } from "../redux/reduxHooks";
 import { getMovieMeta } from "../redux/slice/movieMetaSlice";
 import LoginModal from "../components/modal/loginModal";
 import BookingModal from "../components/modal/bookingModal";
+import AppToast from "../components/appToast";
 
 export default function AppRouter() {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ export default function AppRouter() {
       </Router>
       <BookingModal />
       <LoginModal />
+      <AppToast />
     </div>
   );
 }

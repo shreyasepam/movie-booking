@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/reduxHooks";
 import { logout, setLoginModal } from "../../redux/slice/loginSlice";
 import { cleatBookingSlot } from "../../redux/slice/bookingSlotSlice";
 import { clearBookings } from "../../redux/slice/bookingsSlice";
+import { toast } from "react-toastify";
 
 const Header: React.FC<IHeaderProps> = () => {
   const { pathname } = useLocation();
@@ -22,17 +23,16 @@ const Header: React.FC<IHeaderProps> = () => {
       dispatch(logout());
       dispatch(cleatBookingSlot())
       dispatch(clearBookings())
+      toast("Logged out successfully!!!")
     } else {
       dispatch(setLoginModal({ isOpen: true }));
     }
   };
 
-  console.log("myValias", isLoggedIn);
-
   return (
     <header className=" h-16 flex items-center justify-center px-4 sticky top-0 z-10">
       <div className="max-w-7xl flex items-center justify-between w-full">
-        <h1 className="font-bold text-[#1B2733] text-2xl">BoöK_EM</h1>
+        <h1 className="font-bold text-[#1B2733] text-2xl">🎥BoöK_EM</h1>
         <div className="flex-1 flex items-center justify-center">
           <nav className="bg-blue-dark rounded-full">
             <ul className="flex items-center p-1">

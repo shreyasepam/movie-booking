@@ -8,6 +8,7 @@ import MovieRating from "../movieRating";
 import AppButton from "../appButton";
 import { setLoginModal } from "../../redux/slice/loginSlice";
 import { setBookingSlotModal } from "../../redux/slice/bookingSlotSlice";
+import { toast } from "react-toastify";
 
 const MovieBanner: FC<IMovieBannerProps> = () => {
   const dispatch = useAppDispatch();
@@ -22,12 +23,14 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
           isOpen: true,
           movie: movieDetails,
           user: loginEmail,
-          mode: "new"
+          mode: "new",
         })
       );
+      toast("Tickets booked");
       return;
     }
     dispatch(setLoginModal({ isOpen: true }));
+    toast("Please sign in to book tickets.");
   };
 
   return (

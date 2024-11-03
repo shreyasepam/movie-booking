@@ -10,6 +10,7 @@ import {
   setMovieBooking,
 } from "../../../redux/slice/bookingsSlice";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const BookingModal: React.FC<IBookingModalProps> = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +39,7 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
       return;
     }
     if (bookingModal.mode === "delete") {
+      toast("Booking deleted.");
       onDelete();
       return;
     }
@@ -51,6 +53,7 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
           user: bookingModal.user,
         })
       );
+      toast("Slot booked.");
       onClose();
     } else {
       setError("Make sure time slot and seats are selected.");

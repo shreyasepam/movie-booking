@@ -3,7 +3,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { IBookingsData } from "../interface/Bookings";
 import dayjs from "dayjs";
 import { validDateTime } from "../config";
-import Bookings from "../../dummy/bookings.json"
 
 export interface BookingsState {
   data?: IBookingsData[];
@@ -11,7 +10,7 @@ export interface BookingsState {
 }
 
 const initialState: BookingsState = {
-  data: Bookings as IBookingsData[],
+  data: undefined,
   archived: undefined
 };
 
