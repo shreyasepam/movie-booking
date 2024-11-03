@@ -11,6 +11,7 @@ import { getMovieMeta } from "../redux/slice/movieMetaSlice";
 import LoginModal from "../components/modal/loginModal";
 import BookingModal from "../components/modal/bookingModal";
 import AppToast from "../components/appToast";
+import AppLoading from "../components/appLoading";
 
 export default function AppRouter() {
   const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ export default function AppRouter() {
       <BookingModal />
       <LoginModal />
       <AppToast />
+      <AppLoading />
     </div>
   );
 }

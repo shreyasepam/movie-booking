@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { IDefaultState, IHTTPCodes } from "../reduxInterface";
-import axios, { HTTPCodes, myAxios } from "../axios";
+import axios, { HTTPCodes } from "../axios";
 import GenreData from "../../dummy/genre.json";
 import LanguageData from "../../dummy/languages.json";
 import { IMovieGenre, IMovieLanguage } from "../interface/movieMeta";
@@ -43,12 +43,6 @@ export const getMovieMeta = createAsyncThunk(
         genres,
         languages,
       };
-      // const response = await myAxios.get<IMovie[]>(`/posts`);
-      // if (response && response.data && response.data.length > 0) {
-      //   return response.data;
-      // } else {
-      //   return rejectWithValue(HTTPCodes[204]);
-      // }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
