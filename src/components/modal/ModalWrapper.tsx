@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import Cancel from "../../assets/cancel.svg";
 import { ReactSVG } from "react-svg";
 import Tooltip from "../tooltip";
@@ -19,6 +19,22 @@ const ModalWrapper: React.FC<IModalWrapperProps> = ({
   title,
   onClose,
 }) => {
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen && onClose) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isOpen, onClose]);
+
   return (
     <div
       className={`relative z-10 ${isOpen ? "visible" : "invisible"}`}
