@@ -21,9 +21,9 @@ const Header: React.FC<IHeaderProps> = () => {
     const { value } = event.currentTarget;
     if (value === "logout") {
       dispatch(logout());
-      dispatch(cleatBookingSlot())
-      dispatch(clearBookings())
-      toast("Logged out successfully!!!")
+      dispatch(cleatBookingSlot());
+      dispatch(clearBookings());
+      toast("Logged out successfully!!!");
     } else {
       dispatch(setLoginModal({ isOpen: true }));
     }
@@ -32,7 +32,18 @@ const Header: React.FC<IHeaderProps> = () => {
   return (
     <header className=" h-16 flex items-center justify-center px-4 sticky top-0 z-10">
       <div className="max-w-7xl flex items-center justify-between w-full">
-        <h1 className="font-bold text-[#1B2733] text-2xl">🎥BoöK_EM</h1>
+        <Link
+          to="/"
+          className={`${
+            pathname === "/" ||
+            pathname === "/dashboard" ||
+            pathname === "/home"
+              ? "text-white"
+              : "text-gray-400"
+          } text-sm`}
+        >
+          <h1 className="font-bold text-[#1B2733] text-2xl">🎥BoöK_EM</h1>
+        </Link>
         <div className="flex-1 flex items-center justify-center">
           <nav className="bg-blue-dark rounded-full">
             <ul className="flex items-center p-1">
