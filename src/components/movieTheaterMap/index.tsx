@@ -32,7 +32,7 @@ const MovieTheaterMap: FC<IMovieTheaterMapProps> = () => {
   }, [bookings, bookingSlot.mode, bookingSlot.slot, bookingSlot.movie]);
 
   return (
-    <div className="text-center flex flex-col items-center text-white text-sm py-8">
+    <div className="text-center flex flex-col items-center text-white text-sm py-4">
       <ShowCase />
       <Cinema occupied={occupied} />
       <p className="text-white">

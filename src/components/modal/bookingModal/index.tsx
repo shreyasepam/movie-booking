@@ -5,13 +5,25 @@ import MovieTheaterMap from "../../movieTheaterMap";
 import TimeSlots from "../../timeSlots";
 import AppButton from "../../appButton";
 import { cleatBookingSlot } from "../../../redux/slice/bookingSlotSlice";
-import { deleteMovieBooking, setMovieBooking } from "../../../redux/slice/bookingsSlice";
+import {
+  deleteMovieBooking,
+  setMovieBooking,
+} from "../../../redux/slice/bookingsSlice";
+import { useEffect, useState } from "react";
 
 const BookingModal: React.FC<IBookingModalProps> = () => {
   const dispatch = useAppDispatch();
   const bookingModal = useAppSelector((state) => state.bookingSlot);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    return () => {
+      setError("");
+    };
+  }, []);
 
   const onClose = () => {
+    setError("");
     dispatch(cleatBookingSlot());
   };
 
@@ -21,13 +33,13 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
   };
 
   const onHandleBook = () => {
-    if(bookingModal.mode === "read"){
-        close();
-        return
+    if (bookingModal.mode === "read") {
+      close();
+      return;
     }
-    if(bookingModal.mode === "delete"){
-        onDelete();
-        return;
+    if (bookingModal.mode === "delete") {
+      onDelete();
+      return;
     }
     if (bookingModal.slot && bookingModal.seats.length > 0) {
       dispatch(
@@ -40,6 +52,8 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
         })
       );
       onClose();
+    } else {
+      setError("Make sure time slot and seats are selected.");
     }
   };
 
@@ -52,6 +66,11 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
       <div>
         <TimeSlots />
         <MovieTheaterMap />
+        {error && (
+          <div className="text-center bg-blue-base p-2">
+            <p className="text-gray-100 text-sm">{error}</p>
+          </div>
+        )}
         <div
           className={`px-4 py-3 sm:flex sm:px-6 ${
             bookingModal.mode === "delete"
