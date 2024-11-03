@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 
 export interface BookingsState {
   data?: IBookingsData[];
+  archived?: IBookingsData[];
 }
 
 const initialState: BookingsState = {

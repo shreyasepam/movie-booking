@@ -1,7 +1,6 @@
 import React, { MouseEvent } from "react";
 import IHeaderProps from "./IHeader.props";
 import { ReactSVG } from "react-svg";
-import Search from "../../assets/search.svg";
 import Profile from "../../assets/profile.svg";
 import Logout from "../../assets/logout.svg";
 import { Link, useLocation } from "react-router-dom";
@@ -60,23 +59,6 @@ const Header: React.FC<IHeaderProps> = () => {
                 >
                   Bookings
                 </Link>
-              </li>
-              <li className="">
-                <Tooltip content="Search" position="bottom">
-                  <AppButton
-                    classes={{
-                      root: "rounded-full w-8 h-8 px-1 py-1 ml-4 flex items-center justify-center bg-blue-base",
-                      text: "text-sm font-medium",
-                    }}
-                    icon={
-                      <ReactSVG
-                        src={Search}
-                        className="text-white w-4 h-4 cursor-pointer"
-                        title="Search"
-                      />
-                    }
-                  />
-                </Tooltip>
               </li>
             </ul>
           </nav>
