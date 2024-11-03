@@ -26,7 +26,6 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
           mode: "new",
         })
       );
-      toast("Tickets booked");
       return;
     }
     dispatch(setLoginModal({ isOpen: true }));

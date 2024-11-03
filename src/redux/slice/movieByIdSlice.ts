@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { IDefaultState, IHTTPCodes } from "../reduxInterface";
-import { IMovie, IMovieAPIResponse } from "../interface/movie";
+import { IMovie } from "../interface/movie";
 import axios, { HTTPCodes, myAxios } from "../axios";
-import DummyData from "../../dummy/movies.json";
+// import DummyData from "../../dummy/movies.json";
 
 export interface MoviesState extends IDefaultState {
   data?: IMovie | undefined;
@@ -22,15 +22,15 @@ export const getMovieById = createAsyncThunk<
   { id: string }
 >("movieById/getMovieById", async ({ id }, { rejectWithValue }) => {
   try {
-    const datas = DummyData as IMovieAPIResponse;
-    return datas?.results?.find((x) => x.id === parseInt(id));
+    // const datas = DummyData as IMovieAPIResponse;
+    // return datas?.results?.find((x) => x.id === parseInt(id));
 
-    // const response = await myAxios.get<IMovie[]>(`/posts`);
-    // if (response && response.data && response.data.length > 0) {
-    //   return response.data;
-    // } else {
-    //   return rejectWithValue(HTTPCodes[204]);
-    // }
+    const response = await myAxios.get<IMovie>(`/movie/${id}?language=en-US`);
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return rejectWithValue(HTTPCodes[204]);
+    }
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response) {

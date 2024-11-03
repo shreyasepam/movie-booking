@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { IDefaultState, IHTTPCodes } from "../reduxInterface";
 import { IMovieAPIResponse } from "../interface/movie";
 import axios, { HTTPCodes, myAxios } from "../axios";
-import DummyData from "../../dummy/movies.json";
+// import DummyData from "../../dummy/movies.json";
 
 export interface MoviesState extends IDefaultState {
   data?: IMovieAPIResponse | undefined;
@@ -21,13 +21,14 @@ export const getAllMovies = createAsyncThunk(
   "movie/getAllMovies",
   async (_, { rejectWithValue }) => {
     try {
-      return DummyData as IMovieAPIResponse;
-      // const response = await myAxios.get<IMovie[]>(`/posts`);
-      // if (response && response.data && response.data.length > 0) {
-      //   return response.data;
-      // } else {
-      //   return rejectWithValue(HTTPCodes[204]);
-      // }
+      // return DummyData as IMovieAPIResponse;
+      const response = await myAxios.get<IMovieAPIResponse>(`/movie/popular`);
+      console.log("asdasdasdascxsaas", response)
+      if (response && response.data) {
+        return response.data;
+      } else {
+        return rejectWithValue(HTTPCodes[204]);
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {

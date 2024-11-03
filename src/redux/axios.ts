@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { THTTPCodes } from './reduxInterface';
+import getConfig from '../envConfig';
+
+const config = getConfig();
 
 const myAxios = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com', // Your API base URL
+  baseURL:  config.baseURL,
   headers: {
-    'Content-Type': 'application/json',
-  },
+    accept: 'application/json',
+    Authorization: `Bearer ${config.token}`
+  }
 });
 
 export {myAxios};

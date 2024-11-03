@@ -28,5 +28,5 @@ export const rootReducer = combineReducers({
   movie: MovieByIdReducer,
   movieMeta: MovieMetaReducer,
   bookingSlot: BookingSlotReducer,
-  bookings: BookingsReducer,
+  bookings: persistReducer(localStorage("bookings"), BookingsReducer),
 });
