@@ -6,7 +6,7 @@ export interface IBookingsData {
   movie?: IMovie;
   slot?: IBookingTime;
   seats: number[];
-  date: string;
+  dateTime: string;
   user?: string;
 }
 

@@ -32,7 +32,7 @@ const BookingsGrid: FC<IBookingsGridProps> = ({ booking }) => {
       />
       <BookingsGridItem
         name={"Date"}
-        value={dayjs(booking.date).format("DD/MM/YYYY")}
+        value={dayjs(booking.dateTime).format("DD/MM/YYYY")}
       />
       <BookingsGridItem name={"User"} value={booking.user} />
     </div>

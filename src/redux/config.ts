@@ -37,8 +37,24 @@ export const movieTimeSlot: IBookingTime[] = [
     id: "11PM",
     time: "11:00 PM",
     cost: 350,
-  }
+  },
 ];
+
+export const validDateTime = (
+  givenDate: string,
+  givenTime: string,
+  mode: "isBefore" | "isAfter"
+): boolean => {
+  const now = dayjs();
+  const formattedGivenDate = dayjs(givenDate).format("YYYY-MM-DD");
+  const givenDateTime = dayjs(
+    `${formattedGivenDate} ${givenTime}`,
+    "YYYY-MM-DD h:mm A"
+  );
+  return mode === "isBefore"
+    ? givenDateTime.isBefore(now)
+    : givenDateTime.isAfter(now) || givenDateTime.isSame(now);
+};
 
 export const validTime = (givenTime: string): boolean => {
   const now = dayjs();
@@ -50,7 +66,7 @@ export const validTime = (givenTime: string): boolean => {
   return now.isAfter(givenDateTime);
 };
 
-export const nearestTimeSlot = (): IBookingTime|undefined => {
+export const nearestTimeSlot = (): IBookingTime | undefined => {
   const now = dayjs();
   const today = now.format("YYYY-MM-DD");
   const futureSlots = movieTimeSlot?.slice().filter((slot) => {

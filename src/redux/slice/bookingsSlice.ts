@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { IBookingsData } from "../interface/Bookings";
 import dayjs from "dayjs";
+import { validDateTime } from "../config";
+import Bookings from "../../dummy/bookings.json"
 
 export interface BookingsState {
   data?: IBookingsData[];
@@ -9,7 +11,8 @@ export interface BookingsState {
 }
 
 const initialState: BookingsState = {
-  data: undefined,
+  data: Bookings as IBookingsData[],
+  archived: undefined
 };
 
 export const bookingsSlice = createSlice({
@@ -22,8 +25,21 @@ export const bookingsSlice = createSlice({
         { ...action.payload, id: dayjs().format() },
       ];
     },
-    deleteMovieBooking:(state, action: PayloadAction<string|undefined>) => {
-        state.data = state.data?.filter(booking => booking.id === action.payload);
+    getBookings: (state) => {
+      state.archived = [
+        ...(state.archived || []),
+        ...(state.data || []).filter((booking) =>
+          validDateTime(booking.dateTime, booking.slot?.time || "","isBefore")
+        ),
+      ];
+      state.data = (state.data || []).filter((booking) =>
+        validDateTime(booking.dateTime, booking.slot?.time || "","isAfter")
+      );
+    },
+    deleteMovieBooking: (state, action: PayloadAction<string | undefined>) => {
+      state.data = state.data?.filter(
+        (booking) => booking.id === action.payload
+      );
     },
     clearBookings: (state) => {
       state.data = [];
@@ -31,6 +47,11 @@ export const bookingsSlice = createSlice({
   },
 });
 
-export const { setMovieBooking, deleteMovieBooking, clearBookings } = bookingsSlice.actions;
+export const {
+  setMovieBooking,
+  getBookings,
+  deleteMovieBooking,
+  clearBookings,
+} = bookingsSlice.actions;
 
 export default bookingsSlice.reducer;

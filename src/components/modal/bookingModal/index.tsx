@@ -32,7 +32,7 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
     if (bookingModal.slot && bookingModal.seats.length > 0) {
       dispatch(
         setMovieBooking({
-          date: bookingModal.date,
+          dateTime: bookingModal.dateTime,
           seats: bookingModal.seats,
           slot: bookingModal.slot,
           movie: bookingModal.movie,

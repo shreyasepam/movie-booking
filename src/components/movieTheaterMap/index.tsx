@@ -15,7 +15,7 @@ const MovieTheaterMap: FC<IMovieTheaterMapProps> = () => {
     }
     const occupiedSeats = bookings.data
       ?.filter((booking) => {
-        let parsedDate = dayjs(booking.date);
+        let parsedDate = dayjs(booking.dateTime);
         let startOfParsedDate = parsedDate.startOf("day");
         let startOfToday = dayjs().startOf("day");
         console.log("asdasdsad", startOfParsedDate, startOfToday);

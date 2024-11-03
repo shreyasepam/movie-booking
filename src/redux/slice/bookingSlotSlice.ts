@@ -14,11 +14,9 @@ export interface BookingSlot {
   movie?: IMovie;
   seats: number[];
   user?: string;
-  date: string;
+  dateTime: string;
   mode: BookingMode;
 }
-
-let now = dayjs();
 
 const initialState: BookingSlot = {
   isOpen: false,
@@ -26,7 +24,7 @@ const initialState: BookingSlot = {
   movie: undefined,
   user: undefined,
   seats: [],
-  date: now.format(),
+  dateTime: dayjs().format(),
   mode: "read",
 };
 
@@ -39,7 +37,8 @@ export const getBookedMovieById = createAsyncThunk<
   async ({ id, mode }, { getState, rejectWithValue }) => {
     try {
       const state = getState();
-      const bookings = state.bookings.data;
+      const bookings =
+        mode === "delete" ? state.bookings.data : state.bookings.archived;
       const bookingData = bookings?.find((x) => x.id === id);
       return {
         isOpen: true,
@@ -47,7 +46,7 @@ export const getBookedMovieById = createAsyncThunk<
         movie: bookingData?.movie,
         seats: bookingData?.seats || [],
         user: bookingData?.user,
-        date: bookingData?.date || now.format(),
+        dateTime: bookingData?.dateTime || dayjs().format(),
         mode: mode,
       };
     } catch (error) {
@@ -70,6 +69,7 @@ export const bookingSlotSlice = createSlice({
           state.mode = action.payload.mode;
           state.seats = action.payload.seats;
           state.slot = action.payload.slot;
+          state.dateTime = action.payload.dateTime;
         }
       )
       .addCase(getBookedMovieById.rejected, (state) => {
@@ -78,6 +78,7 @@ export const bookingSlotSlice = createSlice({
         state.seats = [];
         state.slot = nearestTimeSlot();
         state.user = undefined;
+        state.dateTime = dayjs().format();
       });
   },
   reducers: {
@@ -101,14 +102,6 @@ export const bookingSlotSlice = createSlice({
     setSeats: (state, action: PayloadAction<number[]>) => {
       state.seats = action.payload;
     },
-    setBookingData: (state, action: PayloadAction<BookingSlot>) => {
-      state.isOpen = true;
-      state.movie = action.payload.movie;
-      state.user = action.payload.user;
-      state.mode = action.payload.mode;
-      state.slot = action.payload.slot;
-      state.seats = action.payload.seats;
-    },
     cleatBookingSlot: (state) => {
       state.isOpen = false;
       state.movie = undefined;
@@ -119,12 +112,7 @@ export const bookingSlotSlice = createSlice({
   },
 });
 
-export const {
-  setBookingSlotModal,
-  setSlot,
-  setSeats,
-  cleatBookingSlot,
-  setBookingData,
-} = bookingSlotSlice.actions;
+export const { setBookingSlotModal, setSlot, setSeats, cleatBookingSlot } =
+  bookingSlotSlice.actions;
 
 export default bookingSlotSlice.reducer;
