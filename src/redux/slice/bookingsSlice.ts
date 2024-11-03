@@ -22,12 +22,15 @@ export const bookingsSlice = createSlice({
         { ...action.payload, id: dayjs().format() },
       ];
     },
+    deleteMovieBooking:(state, action: PayloadAction<string|undefined>) => {
+        state.data = state.data?.filter(booking => booking.id === action.payload);
+    },
     clearBookings: (state) => {
       state.data = [];
     },
   },
 });
 
-export const { setMovieBooking, clearBookings } = bookingsSlice.actions;
+export const { setMovieBooking, deleteMovieBooking, clearBookings } = bookingsSlice.actions;
 
 export default bookingsSlice.reducer;

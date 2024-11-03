@@ -34,10 +34,10 @@ const TimeSlot: FC<ITimeSlotProps> = ({
 const TimeSlots: FC<ITimeSlotsProps> = () => {
   const dispatch = useAppDispatch();
   const bookingSlot = useAppSelector((state) => state.bookingSlot.slot);
-  const isReadOnly = useAppSelector((state) => state.bookingSlot.isReadOnly);
+  const bookingMode = useAppSelector((state) => state.bookingSlot.mode);
 
   const onHandleClick = (id: string) => {
-    if (!isReadOnly) {
+    if (bookingMode === "new") {
       const slot = movieTimeSlot.find((x) => x.id === id);
       if (slot) {
         dispatch(setSlot(slot));
@@ -53,7 +53,7 @@ const TimeSlots: FC<ITimeSlotsProps> = () => {
           time={slot.time}
           isSelected={bookingSlot?.id === slot.id}
           onClick={onHandleClick}
-          disabled={isReadOnly ? bookingSlot?.id !== slot.id : validTime(slot.time)}
+          disabled={bookingMode !== "new" ? bookingSlot?.id !== slot.id : validTime(slot.time)}
         />
       ))}
     </div>

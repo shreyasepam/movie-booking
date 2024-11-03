@@ -27,7 +27,7 @@ export const Cinema: React.FC<ICinemaProps> = ({ occupied }) => {
 
   return (
     <div className={"mb-5 perspective-[400px] relative"}>
-      {!bookingSlot?.slot || bookingSlot.isReadOnly && (
+      {!bookingSlot?.slot || bookingSlot.mode !== "new" && (
         <div className="absolute  w-full h-full z-[1] hover:cursor-not-allowed top-1" />
       )}
       <div

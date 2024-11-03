@@ -5,13 +5,30 @@ import MovieTheaterMap from "../../movieTheaterMap";
 import TimeSlots from "../../timeSlots";
 import AppButton from "../../appButton";
 import { cleatBookingSlot } from "../../../redux/slice/bookingSlotSlice";
-import { setMovieBooking } from "../../../redux/slice/bookingsSlice";
+import { deleteMovieBooking, setMovieBooking } from "../../../redux/slice/bookingsSlice";
 
 const BookingModal: React.FC<IBookingModalProps> = () => {
   const dispatch = useAppDispatch();
   const bookingModal = useAppSelector((state) => state.bookingSlot);
 
+  const onClose = () => {
+    dispatch(cleatBookingSlot());
+  };
+
+  const onDelete = () => {
+    dispatch(deleteMovieBooking());
+    onClose();
+  };
+
   const onHandleBook = () => {
+    if(bookingModal.mode === "read"){
+        close();
+        return
+    }
+    if(bookingModal.mode === "delete"){
+        onDelete();
+        return;
+    }
     if (bookingModal.slot && bookingModal.seats.length > 0) {
       dispatch(
         setMovieBooking({
@@ -26,39 +43,60 @@ const BookingModal: React.FC<IBookingModalProps> = () => {
     }
   };
 
-  const onClose = () => {
-    dispatch(cleatBookingSlot());
-  };
-
   return (
     <ModalWrapper
       isOpen={bookingModal.isOpen}
-      title={bookingModal.isReadOnly ? "Your booking" : "Book tickets"}
+      title={bookingModal.mode === "new" ? "Book tickets" : "Your booking"}
       onClose={onClose}
     >
       <div>
         <TimeSlots />
         <MovieTheaterMap />
-        <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-          {!bookingModal.isReadOnly && (
+        <div
+          className={`px-4 py-3 sm:flex sm:px-6 ${
+            bookingModal.mode === "delete"
+              ? "sm:flex-row justify-end"
+              : "sm:flex-row-reverse"
+          }`}
+        >
+          {bookingModal.mode !== "read" ? (
+            <>
+              <AppButton
+                classes={{
+                  root: `rounded-md w-full text-white px-3 py-2 flex items-center justify-center ${
+                    bookingModal.mode === "delete"
+                      ? "bg-red-600"
+                      : "bg-blue-base"
+                  } sm:ml-3 sm:w-auto mb-2 sm:mb-0 sm:w-auto`,
+                  text: "text-sm font-medium text-gray-100 ",
+                }}
+                title={bookingModal.mode === "delete" ? "Delete" : "Book"}
+                type="submit"
+                onClick={onHandleBook}
+              />
+              <AppButton
+                classes={{
+                  root: `rounded-md w-full text-white px-3 py-2 flex items-center justify-center sm:ml-3 sm:w-auto ${
+                    bookingModal.mode === "delete"
+                      ? "bg-blue-base"
+                      : "bg-red-600"
+                  }`,
+                  text: "text-sm font-medium text-white",
+                }}
+                title={bookingModal.mode === "delete" ? "Close" : "Cancel"}
+                onClick={onClose}
+              />
+            </>
+          ) : (
             <AppButton
               classes={{
-                root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-blue-base sm:ml-3 sm:w-auto mb-2 sm:mb-0 sm:w-auto",
-                text: "text-sm font-medium text-gray-100 ",
+                root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-blue-base sm:ml-3 sm:w-auto",
+                text: "text-sm font-medium text-white",
               }}
-              title={"Book"}
-              type="submit"
-              onClick={onHandleBook}
+              title={"Close"}
+              onClick={onClose}
             />
           )}
-          <AppButton
-            classes={{
-              root: "rounded-md w-full text-white px-3 py-2 flex items-center justify-center bg-red-600 sm:ml-3 sm:w-auto",
-              text: "text-sm font-medium text-white",
-            }}
-            title={bookingModal?.isReadOnly ? "Close" : "Cancel"}
-            onClick={onClose}
-          />
         </div>
       </div>
     </ModalWrapper>

@@ -9,7 +9,8 @@ const BookingsSection: FC<IBookingSectionProps> = ({ title, data }) => {
   const dispatch = useAppDispatch();
 
   const onHandleClick = (id: string): void => {
-    dispatch(getBookedMovieById({ id }));
+    const mode = title === "History" ? "read" : "delete"
+    dispatch(getBookedMovieById({ id, mode }));
   };
 
   return (

@@ -9,3 +9,5 @@ export interface IBookingsData {
   date: string;
   user?: string;
 }
+
+export type BookingMode = "new" | "delete" | "read";

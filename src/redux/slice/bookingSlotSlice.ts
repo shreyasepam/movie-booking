@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { nearestTimeSlot } from "../config";
 import { RootState } from "../store";
 import { HTTPCodes } from "../axios";
+import { BookingMode } from "../interface/Bookings";
 
 export interface BookingSlot {
   isOpen: boolean;
@@ -14,7 +15,7 @@ export interface BookingSlot {
   seats: number[];
   user?: string;
   date: string;
-  isReadOnly?: boolean;
+  mode: BookingMode;
 }
 
 let now = dayjs();
@@ -26,16 +27,16 @@ const initialState: BookingSlot = {
   user: undefined,
   seats: [],
   date: now.format(),
-  isReadOnly: false,
+  mode: "read",
 };
 
 export const getBookedMovieById = createAsyncThunk<
   BookingSlot,
-  { id: string },
+  { id: string; mode: BookingMode },
   { state: RootState }
 >(
   "bookingSlot/getBookedMovieById",
-  async ({ id }, { getState, rejectWithValue }) => {
+  async ({ id, mode }, { getState, rejectWithValue }) => {
     try {
       const state = getState();
       const bookings = state.bookings.data;
@@ -47,7 +48,7 @@ export const getBookedMovieById = createAsyncThunk<
         seats: bookingData?.seats || [],
         user: bookingData?.user,
         date: bookingData?.date || now.format(),
-        isReadOnly: true,
+        mode: mode,
       };
     } catch (error) {
       return rejectWithValue(HTTPCodes[500]);
@@ -66,7 +67,7 @@ export const bookingSlotSlice = createSlice({
           state.isOpen = action.payload.isOpen;
           state.movie = action.payload.movie;
           state.user = action.payload.user;
-          state.isReadOnly = action.payload.isReadOnly;
+          state.mode = action.payload.mode;
           state.seats = action.payload.seats;
           state.slot = action.payload.slot;
         }
@@ -86,13 +87,13 @@ export const bookingSlotSlice = createSlice({
         isOpen: boolean;
         movie?: IMovie;
         user?: string;
-        isReadOnly?: boolean;
+        mode?: BookingMode;
       }>
     ) => {
       state.isOpen = action.payload.isOpen;
       state.movie = action.payload.movie;
       state.user = action.payload.user;
-      state.isReadOnly = action.payload.isReadOnly;
+      state.mode = action.payload.mode || "read";
     },
     setSlot: (state, action: PayloadAction<IBookingTime>) => {
       state.slot = action.payload;
@@ -104,7 +105,7 @@ export const bookingSlotSlice = createSlice({
       state.isOpen = true;
       state.movie = action.payload.movie;
       state.user = action.payload.user;
-      state.isReadOnly = action.payload.isReadOnly;
+      state.mode = action.payload.mode;
       state.slot = action.payload.slot;
       state.seats = action.payload.seats;
     },

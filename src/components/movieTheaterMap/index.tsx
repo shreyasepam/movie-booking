@@ -10,7 +10,7 @@ const MovieTheaterMap: FC<IMovieTheaterMapProps> = () => {
   const bookings = useAppSelector((state) => state.bookings);
 
   const occupied = useMemo(() => {
-    if (bookingSlot.isReadOnly) {
+    if (bookingSlot.mode !== "new") {
       return [];
     }
     const occupiedSeats = bookings.data
@@ -29,7 +29,7 @@ const MovieTheaterMap: FC<IMovieTheaterMapProps> = () => {
       .flatMap((booking) => booking.seats);
     const set = new Set(occupiedSeats || []);
     return Array.from(set);
-  }, [bookings, bookingSlot.isReadOnly, bookingSlot.slot, bookingSlot.movie]);
+  }, [bookings, bookingSlot.mode, bookingSlot.slot, bookingSlot.movie]);
 
   return (
     <div className="text-center flex flex-col items-center text-white text-sm py-8">

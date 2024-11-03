@@ -22,6 +22,7 @@ const MovieBanner: FC<IMovieBannerProps> = () => {
           isOpen: true,
           movie: movieDetails,
           user: loginEmail,
+          mode: "new"
         })
       );
       return;
