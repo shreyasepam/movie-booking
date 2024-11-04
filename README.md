@@ -3,7 +3,7 @@
 Welcome to **🎥BoöK_EM**, a sophisticated platform that revolutionizes the cinema booking experience.
 
 ## Routes
-```
+```markdown
 |Path|Screen|
 | / | Home |
 | /movie/{movie-id}|Movie details|
