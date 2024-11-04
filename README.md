@@ -4,10 +4,29 @@ Welcome to **🎥BoöK_EM**, a sophisticated platform that revolutionizes the ci
 
 ## Routes
 ```markdown
-|Path|Screen|
-| / | Home |
-| /movie/{movie-id}|Movie details|
-|/bookings|Bookings|
+|
+ Path 
+|
+ Screen
+|
+-------
+|
+-------------
+| 
+/
+| 
+Home
+|
+| 
+/movie/{movie-id}
+|
+Movie details
+|
+|
+/bookings
+|
+Bookings
+|
 ```
   
 ## Technologies Used
