@@ -3,31 +3,12 @@
 Welcome to **🎥BoöK_EM**, a sophisticated platform that revolutionizes the cinema booking experience.
 
 ## Routes
-```markdown
-|
- Path 
-|
- Screen
-|
--------
-|
--------------
-| 
-/
-| 
-Home
-|
-| 
-/movie/{movie-id}
-|
-Movie details
-|
-|
-/bookings
-|
-Bookings
-|
-```
+
+| Path                 | Screen         |
+|----------------------|----------------|
+| `/`                  | Home           |
+| `/movie/{movie-id}`  | Movie Details  |
+| `/bookings`          | Bookings       |
   
 ## Technologies Used
 
