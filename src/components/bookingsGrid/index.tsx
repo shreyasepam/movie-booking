@@ -19,7 +19,6 @@ const BookingsGridItem: FC<{ name?: string; value?: string }> = ({
 };
 
 const BookingsGrid: FC<IBookingsGridProps> = ({ booking }) => {
-  console.log("ASdasdasd", booking);
   return (
     <div className="grid grid-cols-12 gap-0 w-full mt-3">
       <BookingsGridItem name={"Slot"} value={booking.slot?.time} />
