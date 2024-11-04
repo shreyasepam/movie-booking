@@ -3,10 +3,12 @@
 Welcome to **🎥BoöK_EM**, a sophisticated platform that revolutionizes the cinema booking experience.
 
 ## Routes
+```
 |Path|Screen|
 | / | Home |
 | /movie/{movie-id}|Movie details|
 |/bookings|Bookings|
+```
   
 ## Technologies Used
 
@@ -44,7 +46,7 @@ Once you have cloned the repository, you'll need to install the project's depend
   ```bash
   npm install
   ```
-OR
+  OR
 
 - **Using yarn:**
   ```bash
