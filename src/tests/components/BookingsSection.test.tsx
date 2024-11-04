@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { Provider } from "react-redux";
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import BookingsSection from "../../components/bookingsSection";
 import MoviesMock from "../../dummy/movies.json";
