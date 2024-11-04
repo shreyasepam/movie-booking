@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { Provider } from "react-redux";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import BookingsSection from "../../components/bookingsSection";
 import MoviesMock from "../../dummy/movies.json";
@@ -19,6 +19,20 @@ vi.mock("../bookingsGrid", () => () => <div>BookingsGrid</div>);
 const movies = MoviesMock as IMovieAPIResponse;
 const movie = movies.results![0];
 
+const data = [
+  {
+    id: "1",
+    movie: {
+      ...movie,
+      title: "Inception",
+      poster_path: "path/to/inception.jpg",
+    },
+    seats: [10, 14],
+    dateTime: "2025-12-01T18:00:00Z",
+    user: "John Doe",
+  },
+];
+
 describe("BookingsSection", () => {
   afterEach(() => {
     cleanup();
@@ -36,20 +50,6 @@ describe("BookingsSection", () => {
   });
 
   it("handles item clicks correctly", () => {
-    const data = [
-      {
-        id: "1",
-        movie: {
-          ...movie,
-          title: "Inception",
-          poster_path: "path/to/inception.jpg",
-        },
-        seats: [10, 14],
-        dateTime: "2025-12-01T18:00:00Z",
-        user: "John Doe",
-      },
-    ];
-
     const { getByText } = render(
       <Provider store={store}>
         <BookingsSection title="History" data={data} />
@@ -59,5 +59,17 @@ describe("BookingsSection", () => {
     const moviePanel = getByText("Inception");
     screen.debug();
     expect(moviePanel).toBeInTheDocument();
+  });
+
+  it("dispatches expected action on grid item click", () => {
+    render(
+      <Provider store={store}>
+        <BookingsSection title="History" data={data} />
+      </Provider>
+    );
+    screen.debug();
+    expect(
+      screen.getByTestId(`booking-grid-${data[0].id}`)
+    ).toBeInTheDocument();
   });
 });

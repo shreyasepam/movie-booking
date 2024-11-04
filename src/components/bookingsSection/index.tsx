@@ -13,7 +13,7 @@ const BookingsSection: FC<IBookingSectionProps> = ({ title, data }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-4" data-testid="bookings-section">
       <h2 className="text-gray-100 font-semibold text-2xl mb-4">{title}</h2>
       {data && data.length > 0 ? (
         <div className="grid grid-cols-1 gap-1 md:grid-cols-2 md:gap-2 lg:grid-cols-3 mt-4">

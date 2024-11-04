@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import BookingsGrid from "../../components/bookingsGrid";
 import MoviesMock from "../../dummy/movies.json";
 import { IMovieAPIResponse } from "../../redux/interface/movie";
@@ -27,6 +27,9 @@ const mockBooking = {
 const mockHandleClick = vi.fn();
 
 describe("BookingsGrid", () => {
+  afterEach(() => {
+    cleanup();
+  });
   it("renders booking details correctly", () => {
     render(
       <BookingsGrid booking={mockBooking} onHandleClick={mockHandleClick} />
@@ -37,8 +40,11 @@ describe("BookingsGrid", () => {
     expect(screen.getByText("5, 17")).toBeInTheDocument();
     expect(screen.getByText("15/08/2022")).toBeInTheDocument(); // dayjs format
     expect(screen.getByText("John Doe")).toBeInTheDocument();
-    const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('src', 'http://mockimage.server/w500/path/to/example.jpg');
+    const img = screen.getByRole("img");
+    expect(img).toHaveAttribute(
+      "src",
+      "http://mockimage.server/w500/path/to/example.jpg"
+    );
   });
 
   it("should call onHandleClick when booking grid is clicked", () => {

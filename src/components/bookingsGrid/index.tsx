@@ -25,6 +25,7 @@ const BookingsGrid: FC<IBookingsGridProps> = ({ booking, onHandleClick }) => {
       className="flex bg-blue-base p-2 rounded-md shadow-md cursor-pointer hover:shadow-2xl"
       onClick={() => onHandleClick(booking.id!)}
       key={booking.id}
+      data-testid={`booking-grid-${booking.id}`}
     >
       <AppImage
         path={booking.movie?.poster_path || ""}
