@@ -12,6 +12,7 @@ import LoginModal from "../components/modal/loginModal";
 import BookingModal from "../components/modal/bookingModal";
 import AppToast from "../components/appToast";
 import AppLoading from "../components/appLoading";
+import ApiKey from "../screens/apiKey";
 
 export default function AppRouter() {
   const dispatch = useAppDispatch();
@@ -31,6 +32,7 @@ export default function AppRouter() {
             <Route path="/dashboard" element={<Movies />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
             <Route path="/bookings" element={<Bookings />} />
+            <Route path="/api-key" element={<ApiKey />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppContainer>

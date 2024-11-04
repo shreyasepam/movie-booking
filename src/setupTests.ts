@@ -1,8 +1,9 @@
 import "@testing-library/jest-dom/vitest";
 import { vi } from "vitest";
 
-vi.mock('./envConfig', () => ({
+vi.mock("./envConfig", () => ({
   default: () => ({
     imageURI: "http://mockimage.server",
+    token: "app-token",
   }),
 }));

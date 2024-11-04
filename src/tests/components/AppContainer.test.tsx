@@ -1,36 +1,57 @@
-import { it, describe, expect, afterEach } from "viTest";
-import { cleanup, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/vitest';
-import AppContainer from '../../components/appContainer';
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import AppContainer from "../../components/appContainer";
 
-describe('AppContainer', () => {
+const mockNavigate = vi.fn();
+
+vi.mock("react-router-dom", () => ({
+  useNavigate: () => mockNavigate,
+}));
+
+vi.mock("../../envConfig", () => ({
+  default: vi.fn(),
+  getConfig: vi.fn(),
+}));
+
+import getConfig, { Config } from "../../envConfig";
+
+const config: Config = {
+  baseURL: "",
+  imageURI: "",
+  token: "",
+};
+
+describe("AppContainer", () => {
   afterEach(() => {
     cleanup();
+    vi.clearAllMocks();
   });
 
-  it('renders the children passed to it', () => {
-    const testMessage = 'Test child content';
+  it("renders children when token is provided", () => {
+    (getConfig as any).mockReturnValue({
+      ...config,
+      token: "valid-token",
+    });
+
     render(
       <AppContainer>
-        <div>{testMessage}</div>
+        <div>Test Child</div>
       </AppContainer>
     );
 
-    expect(screen.getByText(testMessage)).toBeVisible();
+    expect(screen.getByText("Test Child")).toBeInTheDocument();
+    expect(mockNavigate).not.toHaveBeenCalled();
   });
 
-  it('contains the correct container structure', () => {
-    const testMessage = 'Structure test';
-    const { container } = render(
+  it("redirects to /api-key when token is empty string", () => {
+    (getConfig as any).mockReturnValue({ ...config });
+
+    render(
       <AppContainer>
-        <div>{testMessage}</div>
+        <div>Test Child</div>
       </AppContainer>
     );
 
-    const outerDiv = container.firstChild;
-    const innerDiv = outerDiv!.firstChild;
-
-    expect(outerDiv).toHaveClass('w-full flex justify-center');
-    expect(innerDiv).toHaveClass('w-full max-w-7xl mt-4 p-4');
+    expect(mockNavigate).toHaveBeenCalledWith("/api-key");
   });
 });

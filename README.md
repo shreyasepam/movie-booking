@@ -32,6 +32,17 @@ This project is built with robust and contemporary technology stacks. Here's a l
 
 ## Getting Started
 
+### API key generation
+
+Follow the bellow instructions to get movie api.
+
+- Navigate to **[TMDB movie api](https://developer.themoviedb.org/docs/getting-started)**: To get movie api.
+- Sign in to the site.
+- After sign in navigate to **[Api section](https://www.themoviedb.org/settings/api)**
+- Copy the `API Read Access Token` and paste inside .env file `VITE_MOVIE_TOKEN`.
+- Restart the application via `Run the application` steps.
+
+
 Follow these instructions to get the project up and running on your local machine.
 
 ### Prerequisites

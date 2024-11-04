@@ -1,4 +1,4 @@
-interface Config {
+export interface Config {
    imageURI: string;
    baseURL: string;
    token: string;
