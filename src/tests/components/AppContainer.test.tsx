@@ -1,4 +1,4 @@
-import { it, describe, expect, afterEach, vi } from "viTest";
+import { it, describe, expect, afterEach } from "viTest";
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import AppContainer from '../../components/appContainer';

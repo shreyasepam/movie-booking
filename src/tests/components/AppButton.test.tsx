@@ -1,6 +1,5 @@
-import { it, describe, expect, afterEach, vi } from "viTest";
+import { it, describe, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom/vitest";
 import AppButton from "../../components/appButton";
 
 describe("AppButton", () => {
