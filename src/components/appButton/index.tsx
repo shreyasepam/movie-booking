@@ -5,6 +5,7 @@ const AppButton: FC<IAppButtonProps> = ({ title, icon, classes, ...rest }) => {
 
   return (
     <button
+    data-testid="app-button"
       className={`
           flex items-center gap-2 
           px-4 py-2 
