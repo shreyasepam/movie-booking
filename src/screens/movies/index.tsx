@@ -13,32 +13,30 @@ const Movies: React.FC<IMoviesScreenProps> = () => {
     dispatch(getAllMovies());
   }, []);
 
-  console.log("myMovies", moviesData);
-
   const onCardClick = (id: number) => {
     navigation(`/movie/${id}`);
   };
 
   return (
     <div className="w-full pb-16">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-          {moviesData?.data?.results?.map((movie, i) => (
-            <div key={i}>
-              <MovieCard
-                id={movie.id}
-                poster={movie.poster_path}
-                rating={movie.vote_average}
-                title={movie.title}
-                language={movie.original_language}
-                onCardClick={onCardClick}
-                classes={{
-                    rating:"text-xs",
-                    language:"text-xs",
-                }}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+        {moviesData?.data?.results?.map((movie, i) => (
+          <div key={i}>
+            <MovieCard
+              id={movie.id}
+              poster={movie.poster_path}
+              rating={movie.vote_average}
+              title={movie.title}
+              language={movie.original_language}
+              onCardClick={onCardClick}
+              classes={{
+                rating: "text-xs",
+                language: "text-xs",
+              }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

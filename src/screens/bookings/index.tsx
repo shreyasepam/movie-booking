@@ -8,8 +8,6 @@ const Bookings: React.FC<IBookingsScreenProps> = () => {
   const dispatch = useAppDispatch();
   const bookings = useAppSelector((state) => state.bookings);
 
-  console.log("asdasdasd", bookings)
-
   useEffect(() => {
     dispatch(getBookings());
   }, []);

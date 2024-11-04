@@ -23,7 +23,6 @@ export const getAllMovies = createAsyncThunk(
     try {
       // return DummyData as IMovieAPIResponse;
       const response = await myAxios.get<IMovieAPIResponse>(`/movie/popular`);
-      console.log("asdasdasdascxsaas", response)
       if (response && response.data) {
         return response.data;
       } else {

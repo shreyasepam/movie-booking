@@ -18,7 +18,6 @@ const MovieTheaterMap: FC<IMovieTheaterMapProps> = () => {
         let parsedDate = dayjs(booking.dateTime);
         let startOfParsedDate = parsedDate.startOf("day");
         let startOfToday = dayjs().startOf("day");
-        console.log("asdasdsad", startOfParsedDate, startOfToday);
         return (
           booking.movie?.id === bookingSlot.movie?.id &&
           booking.slot?.id === bookingSlot.slot?.id &&
