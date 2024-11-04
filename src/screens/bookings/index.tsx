@@ -16,7 +16,7 @@ const Bookings: React.FC<IBookingsScreenProps> = () => {
 
   return (
     <div>
-      <BookingsSection title="Upcomings" data={bookings.data} />
+      <BookingsSection title="Upcoming" data={bookings.data} />
       <BookingsSection title="History" data={bookings.archived} />
     </div>
   );

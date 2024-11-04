@@ -1,34 +1,52 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import BookingsGrid from '../../components/bookingsGrid';
-import dayjs from 'dayjs';
+import { describe, it, expect, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import BookingsGrid from "../../components/bookingsGrid";
+import MoviesMock from "../../dummy/movies.json";
+import { IMovieAPIResponse } from "../../redux/interface/movie";
 
-const mockBookingData = {
-  slot: {
-    id: '1',
-    cost: 10,
-    time: '18:00',
+const movies = MoviesMock as IMovieAPIResponse;
+const movie = movies.results![0];
+
+const mockBooking = {
+  id: "1",
+  movie: {
+    ...movie,
+    title: "Example Movie",
+    poster_path: "path/to/example.jpg",
   },
-  seats: [1, 2, 3],
-  dateTime: '2023-10-20T14:00:00.000Z',
-  user: 'John Doe',
+  slot: {
+    time: "7:00 PM",
+    id: "700",
+    cost: 400,
+  },
+  seats: [5, 17],
+  dateTime: "2022-08-15T12:00:00Z",
+  user: "John Doe",
 };
 
-describe('BookingsGrid', () => {
-  it('renders booking details correctly', () => {
-    render(<BookingsGrid booking={mockBookingData} />);
+const mockHandleClick = vi.fn();
 
-    expect(screen.getByText('Slot:')).toBeInTheDocument();
-    expect(screen.getByText('18:00')).toBeInTheDocument();
+describe("BookingsGrid", () => {
+  it("renders booking details correctly", () => {
+    render(
+      <BookingsGrid booking={mockBooking} onHandleClick={mockHandleClick} />
+    );
+    screen.debug();
+    expect(screen.getByText("Example Movie")).toBeInTheDocument();
+    expect(screen.getByText("7:00 PM")).toBeInTheDocument();
+    expect(screen.getByText("5, 17")).toBeInTheDocument();
+    expect(screen.getByText("15/08/2022")).toBeInTheDocument(); // dayjs format
+    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    const img = screen.getByRole('img');
+    expect(img).toHaveAttribute('src', 'http://mockimage.server/w500/path/to/example.jpg');
+  });
 
-    expect(screen.getByText('Seat no:')).toBeInTheDocument();
-    expect(screen.getByText('1, 2, 3')).toBeInTheDocument();
+  it("should call onHandleClick when booking grid is clicked", () => {
+    render(
+      <BookingsGrid booking={mockBooking} onHandleClick={mockHandleClick} />
+    );
 
-    expect(screen.getByText('Date:')).toBeInTheDocument();
-    const formattedDate = dayjs(mockBookingData.dateTime).format('DD/MM/YYYY');
-    expect(screen.getByText(formattedDate)).toBeInTheDocument();
-
-    expect(screen.getByText('User:')).toBeInTheDocument();
-    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Example Movie").closest("div")!); // Use closest div as the clickable area
+    expect(mockHandleClick).toHaveBeenCalledWith("1");
   });
 });
